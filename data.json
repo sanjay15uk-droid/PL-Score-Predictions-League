@@ -83,6 +83,10 @@
     {
       "id": "m_gz85wti",
       "name": "Liam Jose"
+    },
+    {
+      "id": "m_z42rpvd",
+      "name": "James Lang"
     }
   ],
   "gameweeks": {
@@ -550,7 +554,7 @@
   "prize": {
     "entryFee": 76,
     "first": 1000,
-    "second": 400,
-    "third": 196
+    "second": 450,
+    "third": 222
   }
 }
