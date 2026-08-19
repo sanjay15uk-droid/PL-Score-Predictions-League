@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Premier League Predictor</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap');
+  :root{
+    --purple:#38003C; --purpleMid:#5A1E64; --pink:#E90052; --cyan:#04F5FF;
+    --green:#00FF85; --chalk:#F7F5FA; --ink:#1A1420; --red:#C0392B;
+    --border:#E4DCE8; --borderInput:#D3C4DA; --zebra:#F7F1F9;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--chalk);color:var(--ink);font-family:Inter,sans-serif;}
+  .scorebox{width:2.1rem;text-align:center;border-radius:6px;border:1.5px solid var(--borderInput);padding:3px 0;font-family:'Oswald',sans-serif;font-weight:600;font-size:14px;}
+  .scorebox:focus{outline:none;border-color:var(--purpleMid);}
+  .scorebox[readonly]{background:#f3f0f5;color:#888;}
+  h1,h2,h3,.disp{font-family:'Oswald',sans-serif;}
+  table{border-collapse:collapse;width:100%;}
+  th,td{border-bottom:1px solid var(--border);}
+  .btn{cursor:pointer;border:none;font-family:'Oswald',sans-serif;font-weight:600;}
+  .header{background:var(--purple);color:#fff;padding:20px 16px 0;}
+  .headerInner{max-width:900px;margin:0 auto;}
+  .tag{display:flex;align-items:center;gap:8px;font-size:12px;text-transform:uppercase;letter-spacing:2px;}
+  .tabs{display:flex;gap:4px;overflow-x:auto;max-width:900px;margin:14px auto 0;padding:0 16px;}
+  .tab{font-family:'Oswald',sans-serif;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;font-size:13px;padding:10px 16px;background:transparent;color:#D9B8DE;border:none;border-bottom:3px solid transparent;cursor:pointer;white-space:nowrap;}
+  .tab.active{background:var(--chalk);color:var(--purple);border-bottom:3px solid var(--pink);}
+  .content{max-width:900px;margin:0 auto;padding:20px 16px 60px;}
+  .card{border:1px solid var(--border);border-radius:12px;overflow:hidden;background:#fff;}
+  .pill{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;padding:5px 10px;border-radius:999px;cursor:pointer;border:1px solid rgba(255,255,255,0.25);background:rgba(255,255,255,0.12);color:#D9B8DE;}
+  .pill.unlocked{background:var(--green);color:var(--purple);border-color:var(--green);}
+  .empty{font-size:13px;color:#888;border:1px dashed var(--borderInput);border-radius:10px;padding:24px;text-align:center;}
+  input[type=text]{border:1px solid var(--borderInput);border-radius:8px;padding:7px 10px;font-size:14px;font-family:Inter,sans-serif;}
+  .addbtn{background:var(--purpleMid);color:#fff;border-radius:8px;padding:7px 14px;font-size:13px;display:inline-flex;align-items:center;gap:5px;}
+  select{border:1px solid var(--borderInput);border-radius:8px;padding:6px 10px;font-size:14px;}
+  .sticky-col{position:sticky;left:0;z-index:1;}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="headerInner">
+    <div class="tag">🏆 Office Predictions League</div>
+    <h1 style="font-size:32px;font-weight:600;margin:4px 0 0;">Premier League Predictor</h1>
+    <p style="margin:4px 0 0;color:#D9B8DE;font-size:14px;">£2 / week · £76 season · 3pts exact score · 1pt correct result</p>
+    <div style="margin:10px 0 0;">
+      <span id="lockPill" class="pill" onclick="onLockPillClick()">View only · tap to unlock editing</span>
+    </div>
+  </div>
+  <div class="tabs" id="tabs"></div>
+</div>
+
+<div class="content" id="content"></div>
+
+<script>
+const ENTRY_FEE = 76;
+const TOTAL_GAMEWEEKS = 38;
+const EDITOR_PIN = "6288";
+let DATA = null;
+let isEditor = false;
+let activeTab = "standings";
+let gwNum = 1;
+let ghToken = localStorage.getItem("gh-token") || "";
+
+// ---------- data helpers ----------
+function makeId(prefix){ return prefix + "_" + Math.random().toString(36).slice(2,9); }
+function emptyGW(){ return { fixtures:[], predictions:{}, chips:{} }; }
+function getGW(n){ return DATA.gameweeks[n] || emptyGW(); }
+function seasonHalf(n){ return n<=18 ? "H1" : "H2"; }
+function resultSign(h,a){ return h>a?1:(h<a?-1:0); }
+function fixturePoints(pred, actual){
+  if(!pred || pred.home==="" || pred.away==="" || pred.home==null || pred.away==null) return null;
+  if(!actual || actual.home==="" || actual.away==="" || actual.home==null || actual.away==null) return null;
+  const ph=+pred.home, pa=+pred.away, ah=+actual.home, aa=+actual.away;
+  if(ph===ah && pa===aa) return 3;
+  if(resultSign(ph,pa)===resultSign(ah,aa)) return 1;
+  return 0;
+}
+function gwMemberPoints(gw, memberId){
+  const preds=(gw.predictions&&gw.predictions[memberId])||{};
+  const chip=(gw.chips&&gw.chips[memberId])||{double:false,tripleFixtureId:null};
+  let total=0, anyScored=false, exactCount=0; const perFixture={};
+  (gw.fixtures||[]).forEach(fx=>{
+    const pts=fixturePoints(preds[fx.id], {home:fx.actualHome, away:fx.actualAway});
+    perFixture[fx.id]=pts;
+    if(pts!==null){ anyScored=true; if(pts===3) exactCount++; let p=pts; if(chip.tripleFixtureId===fx.id) p*=3; total+=p; }
+  });
+  if(chip.double) total*=2;
+  return {total, anyScored, exactCount, perFixture};
+}
+function chipUsageExcluding(memberId, half, excludeGw){
+  let double=0, triple=0;
+  Object.entries(DATA.gameweeks).forEach(([gwStr,gw])=>{
+    const n=+gwStr; if(n===excludeGw) return; if(seasonHalf(n)!==half) return;
+    const chip=(gw.chips&&gw.chips[memberId])||{};
+    if(chip.double) double++; if(chip.tripleFixtureId) triple++;
+  });
+  return {double,triple};
+}
+function chipUsageSummary(memberId){
+  const usage={H1:{double:0,triple:0},H2:{double:0,triple:0}};
+  Object.entries(DATA.gameweeks).forEach(([gwStr,gw])=>{
+    const n=+gwStr; const half=seasonHalf(n);
+    const chip=(gw.chips&&gw.chips[memberId])||{};
+    if(chip.double) usage[half].double++; if(chip.tripleFixtureId) usage[half].triple++;
+  });
+  return usage;
+}
+const DEFAULT_PRIZE = { entryFee: 76, first: 1000, second: 360, third: 160 };
+function calcPrizePot(memberCount){
+  const prize = (DATA && DATA.prize) || DEFAULT_PRIZE;
+  const entryFee = prize.entryFee ?? DEFAULT_PRIZE.entryFee;
+  const first = prize.first ?? DEFAULT_PRIZE.first;
+  const second = prize.second ?? DEFAULT_PRIZE.second;
+  const third = prize.third ?? DEFAULT_PRIZE.third;
+  const total = memberCount*entryFee;
+  const allocated = first+second+third;
+  return {total, entryFee, first, second, third, leftover: total-allocated, allocated};
+}
+function updatePrize(field, value){
+  if(!isEditor) return;
+  const num = value===""?"":Number(value);
+  DATA.prize = {...(DATA.prize||DEFAULT_PRIZE), [field]: num};
+  render();
+}
+function esc(s){ return (s||"").replace(/[&<>"']/g, c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c])); }
+// Alphabetical player order used throughout the Gameweek tab, so the
+// column/row order stays identical week to week regardless of when
+// someone was added or how they're doing in the table.
+function sortedMembers(){ return [...DATA.members].sort((a,b)=>a.name.localeCompare(b.name)); }
+
+// ---------- persistence ----------
+async function loadData(){
+  try{
+    const res = await fetch('./data.json?t=' + Date.now());
+    DATA = await res.json();
+  }catch(e){
+    DATA = { members: [], gameweeks: {}, prize: {...DEFAULT_PRIZE} };
+  }
+}
+
+function ghInfo(){
+  const host = location.hostname; // e.g. someuser.github.io
+  const owner = host.split(".")[0];
+  const parts = location.pathname.split("/").filter(Boolean);
+  const repo = parts[0] || "";
+  return {owner, repo};
+}
+
+async function publishLive(){
+  const {owner, repo} = ghInfo();
+  if(!owner || !repo){
+    showManualExport("Couldn't work out your GitHub repo from the URL — use the manual copy method below.");
+    return;
+  }
+  if(!ghToken){
+    ghToken = prompt("Paste your GitHub personal access token (Contents: Read & write on this repo). It's saved only in this browser.");
+    if(!ghToken) return;
+    localStorage.setItem("gh-token", ghToken);
+  }
+  const statusEl = document.getElementById("publishStatus");
+  statusEl.textContent = "Publishing…";
+  try{
+    const getRes = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/data.json`, {
+      headers: { Authorization: `token ${ghToken}` }
+    });
+    if(!getRes.ok) throw new Error("Couldn't read current data.json (" + getRes.status + ")");
+    const getJson = await getRes.json();
+    const sha = getJson.sha;
+    const content = btoa(unescape(encodeURIComponent(JSON.stringify(DATA, null, 2))));
+    const putRes = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/data.json`, {
+      method: "PUT",
+      headers: { Authorization: `token ${ghToken}`, "Content-Type": "application/json" },
+      body: JSON.stringify({ message: "Update league data", content, sha })
+    });
+    if(!putRes.ok){
+      const errBody = await putRes.text();
+      throw new Error("GitHub rejected the update (" + putRes.status + "): " + errBody.slice(0,200));
+    }
+    statusEl.textContent = "Published — live for everyone.";
+    setTimeout(()=>{ statusEl.textContent = ""; }, 4000);
+  }catch(e){
+    statusEl.textContent = "";
+    showManualExport("Automatic publish failed: " + e.message);
+  }
+}
+
+function showManualExport(reason){
+  const json = JSON.stringify(DATA, null, 2);
+  const box = document.getElementById("manualExport");
+  box.style.display = "block";
+  box.querySelector(".reason").textContent = reason;
+  box.querySelector("textarea").value = json;
+}
+
+function forgetToken(){
+  ghToken = "";
+  localStorage.removeItem("gh-token");
+  alert("Token forgotten on this device.");
+}
+
+// ---------- editor lock ----------
+function onLockPillClick(){
+  if(isEditor){
+    isEditor = false;
+  } else {
+    const entered = prompt("Enter the PIN to enable editing:");
+    if(entered === null) return;
+    if(entered.trim() === EDITOR_PIN){ isEditor = true; }
+    else { alert("Incorrect PIN."); return; }
+  }
+  render();
+}
+
+// ---------- mutations (editor only, all guarded) ----------
+function updateGW(n, updater){
+  if(!isEditor) return;
+  const cur = getGW(n);
+  DATA.gameweeks[n] = updater(cur);
+  render();
+}
+function addFixture(home, away){
+  if(!isEditor || !home.trim() || !away.trim()) return;
+  updateGW(gwNum, g => ({...g, fixtures:[...g.fixtures, {id:makeId("fx"), home:home.trim(), away:away.trim(), actualHome:"", actualAway:""}]}));
+}
+function removeFixture(fxId){
+  if(!isEditor) return;
+  updateGW(gwNum, g => {
+    const predictions = {};
+    Object.entries(g.predictions).forEach(([mid,preds])=>{ const {[fxId]:_, ...rest} = preds; predictions[mid]=rest; });
+    const chips = {};
+    Object.entries(g.chips).forEach(([mid,c])=>{ chips[mid] = c.tripleFixtureId===fxId ? {...c, tripleFixtureId:null} : c; });
+    return {...g, fixtures: g.fixtures.filter(f=>f.id!==fxId), predictions, chips};
+  });
+}
+function setActual(fxId, field, value){
+  if(!isEditor) return;
+  updateGW(gwNum, g => ({...g, fixtures: g.fixtures.map(f=>f.id===fxId?{...f,[field]:value}:f)}));
+}
+function setPrediction(memberId, fxId, field, value){
+  if(!isEditor) return;
+  updateGW(gwNum, g => ({...g, predictions:{...g.predictions, [memberId]:{...(g.predictions[memberId]||{}), [fxId]:{...((g.predictions[memberId]||{})[fxId]||{home:"",away:""}), [field]:value}}}}));
+}
+function toggleDouble(memberId){
+  if(!isEditor) return;
+  const gw = getGW(gwNum); const half = seasonHalf(gwNum);
+  const current = gw.chips[memberId] || {double:false, tripleFixtureId:null};
+  if(!current.double){
+    const usage = chipUsageExcluding(memberId, half, gwNum);
+    if(usage.double>=2){ alert("Already used Double Gameweek twice this half."); return; }
+  }
+  updateGW(gwNum, g => { const c=g.chips[memberId]||{double:false,tripleFixtureId:null}; return {...g, chips:{...g.chips,[memberId]:{...c,double:!c.double}}}; });
+}
+function setTripleFixture(memberId, fxId){
+  if(!isEditor) return;
+  const gw = getGW(gwNum); const half = seasonHalf(gwNum);
+  const current = gw.chips[memberId] || {double:false, tripleFixtureId:null};
+  const turningOn = !current.tripleFixtureId && fxId;
+  if(turningOn){
+    const usage = chipUsageExcluding(memberId, half, gwNum);
+    if(usage.triple>=2){ alert("Already used Triple Fixture twice this half."); return; }
+  }
+  updateGW(gwNum, g => { const c=g.chips[memberId]||{double:false,tripleFixtureId:null}; return {...g, chips:{...g.chips,[memberId]:{...c,tripleFixtureId: fxId||null}}}; });
+}
+function addMember(name){
+  if(!isEditor || !name.trim()) return;
+  DATA.members.push({id:makeId("m"), name:name.trim()});
+  render();
+}
+function renameMember(id, name){
+  if(!isEditor) return;
+  DATA.members = DATA.members.map(m=>m.id===id?{...m,name}:m);
+}
+function removeMember(id){
+  if(!isEditor) return;
+  DATA.members = DATA.members.filter(m=>m.id!==id);
+  render();
+}
+
+// ---------- rendering ----------
+function render(){
+  // Preserve scroll position across the DOM rebuild below — otherwise every
+  // edit snaps the page back to the top and the predictions table back to
+  // its leftmost column.
+  const pageScrollY = window.scrollY;
+  const predWrapOld = document.getElementById("predWrap");
+  const predScrollLeft = predWrapOld ? predWrapOld.scrollLeft : null;
+
+  document.getElementById("lockPill").outerHTML = isEditor
+    ? `<span id="lockPill" class="pill unlocked" onclick="onLockPillClick()">✓ Editing enabled · tap to lock</span>`
+    : `<span id="lockPill" class="pill" onclick="onLockPillClick()">View only · tap to unlock editing</span>`;
+
+  const tabs = [
+    {id:"standings", label:"Standings"},
+    {id:"gameweek", label:"Gameweek"},
+  ];
+  if(isEditor) tabs.push({id:"members", label:"Members"});
+  document.getElementById("tabs").innerHTML = tabs.map(t =>
+    `<button class="tab ${activeTab===t.id?'active':''}" onclick="setTab('${t.id}')">${t.label}</button>`
+  ).join("");
+
+  const content = document.getElementById("content");
+  if(activeTab==="standings") content.innerHTML = renderStandings();
+  else if(activeTab==="gameweek") content.innerHTML = renderGameweek();
+  else if(activeTab==="members" && isEditor) content.innerHTML = renderMembers();
+  wireEvents();
+
+  const predWrapNew = document.getElementById("predWrap");
+  if(predWrapNew && predScrollLeft !== null) predWrapNew.scrollLeft = predScrollLeft;
+  window.scrollTo(0, pageScrollY);
+}
+function setTab(id){ activeTab=id; render(); }
+
+function renderStandings(){
+  const gwCount = Object.keys(DATA.gameweeks).length;
+  const pot = calcPrizePot(DATA.members.length);
+  const standings = DATA.members.map(m=>{
+    let total=0, gwsPlayed=0, exactScores=0;
+    Object.values(DATA.gameweeks).forEach(g=>{
+      const {total:t, anyScored, exactCount} = gwMemberPoints(g, m.id);
+      if(anyScored){ total+=t; gwsPlayed++; exactScores+=exactCount; }
+    });
+    return {...m, total, gwsPlayed, exactScores};
+  }).sort((a,b)=> b.total-a.total || b.exactScores-a.exactScores || a.name.localeCompare(b.name));
+
+  const prizeRow = (label, field, amount, color) => isEditor ? `
+    <div style="text-align:center;padding:12px 0;">
+      <div style="font-size:11px;text-transform:uppercase;color:#888;">${label}</div>
+      <div style="display:flex;align-items:center;justify-content:center;gap:2px;">
+        <span class="disp" style="font-size:18px;font-weight:600;color:${color};">£</span>
+        <input type="number" min="0" class="disp" data-prize="${field}" value="${amount}" style="width:76px;text-align:center;font-size:18px;font-weight:600;color:${color};border:1px solid var(--borderInput);border-radius:6px;padding:2px 0;" />
+      </div>
+    </div>` : `
+    <div style="text-align:center;padding:12px 0;">
+      <div style="font-size:11px;text-transform:uppercase;color:#888;">${label}</div>
+      <div class="disp" style="font-size:20px;font-weight:600;color:${color};">£${amount}</div>
+    </div>`;
+
+  return `
+    <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:12px;">
+      <h2 style="font-size:20px;font-weight:600;margin:0;">League Table</h2>
+      <span style="font-size:12px;color:#888;">${gwCount} gameweek${gwCount===1?'':'s'} recorded</span>
+    </div>
+    <div class="card" style="margin-bottom:16px;">
+      <div style="background:var(--purple);color:#fff;padding:10px 16px;display:flex;justify-content:space-between;align-items:center;">
+        <span style="font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;">Prize Pot</span>
+        <span style="font-size:12px;color:#D9B8DE;display:flex;align-items:center;gap:4px;">
+          ${DATA.members.length} players ·
+          ${isEditor ? `£<input type="number" min="0" data-prize="entryFee" value="${pot.entryFee}" style="width:48px;text-align:center;border-radius:4px;background:rgba(255,255,255,0.15);color:#fff;border:1px solid rgba(255,255,255,0.3);" /> each`
+                     : `£${pot.entryFee} each`}
+        </span>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;border-top:1px solid var(--border);">
+        ${prizeRow("1st","first",pot.first,"var(--pink)")}
+        ${prizeRow("2nd","second",pot.second,"var(--purpleMid)")}
+        ${prizeRow("3rd","third",pot.third,"var(--cyan)")}
+      </div>
+      <div style="padding:8px 16px;font-size:12px;color:#888;border-top:1px solid var(--border);">
+        Total pot: <strong>£${pot.total}</strong> · Allocated: <strong>£${pot.allocated}</strong>
+        ${pot.leftover>0?` · £${pot.leftover} left over`:''}
+        ${pot.leftover<0?` · <span style="color:var(--red);">£${-pot.leftover} over the pot — reduce a prize</span>`:''}
+        ${isEditor?` · tap any amount above to edit`:''}
+      </div>
+    </div>
+    <p style="font-size:12px;background:#FCE0EC;color:#7A0030;padding:8px 12px;border-radius:8px;margin-bottom:12px;">
+      <strong>Tiebreaker:</strong> if two or more players finish the season level on points, the title goes to whoever has the most correct exact scores across the season.
+    </p>
+    ${standings.length===0 ? `<div class="empty">No members yet.</div>` : `
+    <div class="card" style="overflow-x:auto;">
+      <table>
+        <thead><tr style="background:var(--purpleMid);color:#fff;font-family:'Oswald',sans-serif;">
+          <th style="text-align:left;padding:10px 12px;width:40px;">#</th>
+          <th style="text-align:left;padding:10px 12px;">Player</th>
+          <th style="text-align:right;padding:10px 12px;">GWs</th>
+          <th style="text-align:right;padding:10px 12px;">Exact</th>
+          <th style="text-align:right;padding:10px 12px;" title="Double Gameweek chips used this season (out of 4)">⚡ Used</th>
+          <th style="text-align:right;padding:10px 12px;" title="Triple Fixture chips used this season (out of 4)">★ Used</th>
+          <th style="text-align:right;padding:10px 16px;">Points</th>
+        </tr></thead>
+        <tbody>
+          ${standings.map((m,i)=>{
+            const usage = chipUsageSummary(m.id);
+            const doubleUsed = usage.H1.double + usage.H2.double;
+            const tripleUsed = usage.H1.triple + usage.H2.triple;
+            return `
+            <tr style="background:${i%2===0?'#fff':'var(--zebra)'};">
+              <td style="padding:10px 12px;">${i===0?`<span style="color:var(--pink);font-weight:600;">1</span>`:`<span style="color:#888;">${i+1}</span>`}</td>
+              <td style="padding:10px 12px;font-weight:500;white-space:nowrap;">${esc(m.name)}</td>
+              <td style="padding:10px 12px;text-align:right;color:#888;">${m.gwsPlayed}</td>
+              <td style="padding:10px 12px;text-align:right;color:#888;">${m.exactScores}</td>
+              <td style="padding:10px 12px;text-align:right;color:${doubleUsed>=4?'var(--red)':'#666'};">${doubleUsed}/4</td>
+              <td style="padding:10px 12px;text-align:right;color:${tripleUsed>=4?'var(--red)':'#666'};">${tripleUsed}/4</td>
+              <td style="padding:10px 16px;text-align:right;font-weight:600;" class="disp">${m.total}</td>
+            </tr>`;
+          }).join("")}
+        </tbody>
+      </table>
+    </div>`}
+  `;
+}
+
+function renderGameweek(){
+  const gw = getGW(gwNum);
+  const half = seasonHalf(gwNum);
+
+  let html = `
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;">
+      <div style="display:flex;align-items:center;gap:12px;">
+        <button class="btn" onclick="changeGW(-1)" style="background:transparent;border:1px solid var(--borderInput);border-radius:999px;width:34px;height:34px;">‹</button>
+        <div style="text-align:center;">
+          <div class="disp" style="font-size:22px;font-weight:600;color:var(--purple);line-height:1;">Gameweek ${gwNum}</div>
+          <div style="font-size:11px;color:#888;margin-top:4px;">Chip half: ${half==='H1'?'1–18':'19–38'}</div>
+        </div>
+        <button class="btn" onclick="changeGW(1)" style="background:transparent;border:1px solid var(--borderInput);border-radius:999px;width:34px;height:34px;">›</button>
+      </div>
+      <select onchange="jumpGW(this.value)">
+        ${Array.from({length:TOTAL_GAMEWEEKS},(_,i)=>i+1).map(n=>`<option value="${n}" ${n===gwNum?'selected':''}>GW ${n}</option>`).join("")}
+      </select>
+    </div>
+
+    <div class="card" style="margin-bottom:16px;overflow:hidden;">
+      <div style="padding:10px 12px;display:flex;align-items:flex-start;gap:8px;font-size:12px;border-bottom:1px solid var(--border);">
+        <span style="color:var(--cyan);text-shadow:0 0 1px #999;flex-shrink:0;margin-top:1px;">⚡</span>
+        <div><strong>Double Gameweek (⚡)</strong> — doubles that player's entire points total for this gameweek. Can be used twice per half of the season (GWs 1–18, then 19–38).</div>
+      </div>
+      <div style="padding:10px 12px;display:flex;align-items:flex-start;gap:8px;font-size:12px;">
+        <span style="color:var(--pink);flex-shrink:0;margin-top:1px;">★</span>
+        <div><strong>Triple Fixture (★)</strong> — triples the points from one chosen match that gameweek. Also usable twice per half of the season.</div>
+      </div>
+    </div>
+    <p style="font-size:12px;background:#FCE0EC;color:#7A0030;padding:8px 12px;border-radius:8px;margin-bottom:16px;">
+      <strong>Deadline:</strong> all predictions must be in no later than 1 minute before the first fixture of the gameweek kicks off. Any player who hasn't submitted by then is recorded as 0–0 for every fixture that week.
+    </p>
+
+    <div style="margin-bottom:24px;">
+      <h3 style="font-size:13px;text-transform:uppercase;color:#666;margin-bottom:8px;">Fixtures &amp; actual scores</h3>
+      <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:12px;">
+        ${gw.fixtures.length===0 ? `<div class="empty">No fixtures added for this gameweek yet.</div>` : gw.fixtures.map(fx=>`
+          <div style="display:flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--border);border-radius:8px;padding:8px 12px;">
+            <div style="flex:1;font-size:14px;font-weight:500;">${esc(fx.home)} <span style="color:#999;font-weight:400;">v</span> ${esc(fx.away)}</div>
+            <input type="number" min="0" class="scorebox" data-actual="${fx.id}:actualHome" value="${fx.actualHome}" placeholder="-" ${isEditor?'':'readonly'} />
+            <span style="color:#999;">–</span>
+            <input type="number" min="0" class="scorebox" data-actual="${fx.id}:actualAway" value="${fx.actualAway}" placeholder="-" ${isEditor?'':'readonly'} />
+            ${isEditor?`<button class="btn" data-removefx="${fx.id}" style="background:transparent;color:#999;">✕</button>`:''}
+          </div>`).join("")}
+      </div>
+      ${isEditor?`
+      <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+        <input type="text" id="newFxHome" placeholder="Home team" style="flex:1;min-width:140px;" />
+        <span style="color:#999;font-size:14px;">v</span>
+        <input type="text" id="newFxAway" placeholder="Away team" style="flex:1;min-width:140px;" />
+        <button class="addbtn btn" onclick="onAddFixture()">+ Add</button>
+      </div>`:''}
+    </div>
+  `;
+
+  if(gw.fixtures.length>0 && DATA.members.length>0){
+    html += `
+    <div style="margin-bottom:24px;">
+      <h3 style="font-size:13px;text-transform:uppercase;color:#666;margin-bottom:4px;">Predictions</h3>
+      <p style="font-size:12px;color:#888;margin-bottom:12px;">
+        ${isEditor ? "Scroll sideways for each player. The ⚡ under a player's name sets Double Gameweek; the ★ in a cell sets Triple Fixture for that match." : "View only — scroll sideways to see everyone's predictions, chips and live points."}
+      </p>
+      <div class="card" id="predWrap" style="overflow-x:auto;">
+        <table>
+          <thead><tr style="background:var(--purpleMid);color:#fff;">
+            <th class="sticky-col" style="background:var(--purpleMid);text-align:left;padding:10px 12px;min-width:150px;font-family:'Oswald',sans-serif;">Fixture</th>
+            ${sortedMembers().map(m=>{
+              const chip = gw.chips[m.id] || {double:false, tripleFixtureId:null};
+              const usage = chipUsageExcluding(m.id, half, gwNum);
+              const doubleBlocked = !chip.double && usage.double>=2;
+              return `<th style="text-align:center;padding:10px 8px;min-width:104px;font-family:'Oswald',sans-serif;">
+                <div style="font-size:11px;white-space:nowrap;margin-bottom:4px;">${esc(m.name)}</div>
+                <button class="btn" data-double="${m.id}" ${(!isEditor||doubleBlocked)?'disabled':''} style="display:inline-flex;align-items:center;gap:3px;padding:2px 6px;border-radius:4px;font-size:10px;font-weight:600;background:${chip.double?'var(--cyan)':'transparent'};border:1px solid ${chip.double?'var(--cyan)':'rgba(255,255,255,0.4)'};color:${chip.double?'var(--purple)':'rgba(255,255,255,0.8)'};opacity:${(!isEditor||doubleBlocked)?0.5:1};">⚡ ${chip.double?'2x':'—'}</button>
+              </th>`;
+            }).join("")}
+          </tr></thead>
+          <tbody>
+            ${gw.fixtures.map((fx,fi)=>`
+              <tr style="background:${fi%2===0?'#fff':'var(--zebra)'};">
+                <td class="sticky-col" style="background:${fi%2===0?'#fff':'var(--zebra)'};padding:8px 12px;">
+                  <div style="font-size:12px;font-weight:500;white-space:nowrap;">${esc(fx.home)} <span style="color:#999;font-weight:400;">v</span> ${esc(fx.away)}</div>
+                  <div style="display:flex;align-items:center;gap:4px;margin-top:4px;">
+                    <span style="font-size:9px;text-transform:uppercase;color:#999;">Actual</span>
+                    <input type="number" min="0" class="scorebox" style="width:1.7rem;padding:2px 0;" data-actual="${fx.id}:actualHome" value="${fx.actualHome}" placeholder="-" ${isEditor?'':'readonly'} />
+                    <span style="color:#999;font-size:12px;">-</span>
+                    <input type="number" min="0" class="scorebox" style="width:1.7rem;padding:2px 0;" data-actual="${fx.id}:actualAway" value="${fx.actualAway}" placeholder="-" ${isEditor?'':'readonly'} />
+                  </div>
+                </td>
+                ${sortedMembers().map(m=>{
+                  const chip = gw.chips[m.id] || {double:false, tripleFixtureId:null};
+                  const pred = (gw.predictions[m.id]||{})[fx.id] || {home:"",away:""};
+                  const pts = fixturePoints(pred, {home:fx.actualHome, away:fx.actualAway});
+                  const tripled = chip.tripleFixtureId===fx.id;
+                  const usage = chipUsageExcluding(m.id, half, gwNum);
+                  const tripleBlocked = !chip.tripleFixtureId && usage.triple>=2;
+                  let bg = "transparent"; if(pts===3) bg="#D9FFEF"; else if(pts===1) bg="#DFF9FF";
+                  return `<td style="padding:6px 8px;background:${bg};">
+                    <div style="display:flex;align-items:center;justify-content:center;gap:4px;">
+                      <input type="number" min="0" class="scorebox" style="width:1.7rem;padding:2px 0;" data-pred="${m.id}:${fx.id}:home" value="${pred.home}" ${isEditor?'':'readonly'} />
+                      <span style="color:#999;font-size:12px;">-</span>
+                      <input type="number" min="0" class="scorebox" style="width:1.7rem;padding:2px 0;" data-pred="${m.id}:${fx.id}:away" value="${pred.away}" ${isEditor?'':'readonly'} />
+                      <button class="btn" data-triple="${m.id}:${fx.id}" ${(!isEditor||(!tripled&&tripleBlocked))?'disabled':''} style="background:transparent;padding:2px;opacity:${(!tripled&&tripleBlocked)?0.4:1};">
+                        <span style="color:${tripled?'var(--pink)':'#c9c4b4'};font-size:14px;">★</span>
+                      </button>
+                    </div>
+                  </td>`;
+                }).join("")}
+              </tr>`).join("")}
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div style="margin-bottom:24px;">
+      <h3 style="font-size:13px;text-transform:uppercase;color:#666;margin-bottom:8px;">Gameweek ${gwNum} totals</h3>
+      <div style="display:flex;flex-direction:column;gap:6px;">
+        ${sortedMembers().map(m=>{
+          const {total} = gwMemberPoints(gw, m.id);
+          return `<div style="display:flex;justify-content:space-between;background:#fff;border:1px solid var(--border);border-radius:8px;padding:8px 12px;">
+            <span style="font-size:14px;font-weight:500;">${esc(m.name)}</span>
+            <span class="disp" style="font-size:14px;font-weight:600;">${total}</span>
+          </div>`;
+        }).join("")}
+      </div>
+      <div style="margin-top:16px;">
+        <h3 style="font-size:13px;text-transform:uppercase;color:#666;margin-bottom:8px;">Chip usage — ${half==='H1'?'Gameweeks 1–18':'Gameweeks 19–38'}</h3>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;">
+          ${sortedMembers().map(m=>{
+            const usage = chipUsageSummary(m.id)[half];
+            const doubleOk = usage.double<=2, tripleOk = usage.triple<=2;
+            return `<div style="font-size:11px;padding:6px 10px;border-radius:8px;border:1px solid var(--border);background:#fff;display:flex;align-items:center;gap:8px;">
+              <span style="font-weight:500;">${esc(m.name)}</span>
+              <span style="color:${doubleOk?'#557':'var(--red)'};">⚡ ${usage.double}/2</span>
+              <span style="color:${tripleOk?'#557':'var(--red)'};">★ ${usage.triple}/2</span>
+            </div>`;
+          }).join("")}
+        </div>
+      </div>
+    </div>`;
+  }
+
+  if(isEditor){
+    html += `
+    <div class="card" style="padding:16px;">
+      <h3 style="font-size:13px;text-transform:uppercase;color:#666;margin:0 0 8px;">Publish your changes live</h3>
+      <p style="font-size:12px;color:#888;margin:0 0 10px;">Your edits above are only in this browser tab until you publish. Publishing pushes them to data.json on GitHub, live for everyone.</p>
+      <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+        <button class="btn addbtn" onclick="publishLive()">Publish live</button>
+        <button class="btn" onclick="forgetToken()" style="background:transparent;color:#999;font-size:12px;text-decoration:underline;">Forget saved token</button>
+        <span id="publishStatus" style="font-size:12px;color:#666;"></span>
+      </div>
+      <div id="manualExport" style="display:none;margin-top:14px;padding-top:14px;border-top:1px solid var(--border);">
+        <p style="font-size:12px;color:var(--red);margin:0 0 8px;" class="reason"></p>
+        <p style="font-size:12px;color:#888;margin:0 0 8px;">Copy this and paste it over the contents of <code>data.json</code> in your GitHub repo (open the file → pencil/edit icon → select all → paste → Commit changes).</p>
+        <textarea readonly style="width:100%;height:140px;font-family:monospace;font-size:11px;border:1px solid var(--borderInput);border-radius:8px;padding:8px;"></textarea>
+      </div>
+    </div>`;
+  }
+
+  return html;
+}
+
+function renderMembers(){
+  return `
+    <h2 style="font-size:20px;font-weight:600;margin:0 0 12px;">Members</h2>
+    <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:16px;">
+      ${DATA.members.map(m=>`
+        <div style="display:flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--border);border-radius:8px;padding:8px 12px;">
+          <input type="text" data-rename="${m.id}" value="${esc(m.name)}" style="flex:1;border:none;font-size:14px;outline:none;" />
+          <button class="btn" data-removemember="${m.id}" style="background:transparent;color:#999;">✕</button>
+        </div>`).join("")}
+    </div>
+    <div style="display:flex;gap:8px;">
+      <input type="text" id="newMemberName" placeholder="Add a player…" style="flex:1;" />
+      <button class="addbtn btn" onclick="onAddMember()">+ Add</button>
+    </div>
+  `;
+}
+
+// ---------- event wiring (since we render via innerHTML) ----------
+function wireEvents(){
+  document.querySelectorAll('[data-actual]').forEach(el=>{
+    el.addEventListener('change', e=>{
+      const [fxId, field] = e.target.dataset.actual.split(":");
+      setActual(fxId, field, e.target.value);
+    });
+  });
+  document.querySelectorAll('[data-pred]').forEach(el=>{
+    el.addEventListener('change', e=>{
+      const [mid, fxId, field] = e.target.dataset.pred.split(":");
+      setPrediction(mid, fxId, field, e.target.value);
+    });
+  });
+  document.querySelectorAll('[data-double]').forEach(el=>{
+    el.addEventListener('click', e=> toggleDouble(e.currentTarget.dataset.double));
+  });
+  document.querySelectorAll('[data-triple]').forEach(el=>{
+    el.addEventListener('click', e=>{
+      const [mid, fxId] = e.currentTarget.dataset.triple.split(":");
+      const gw = getGW(gwNum); const chip = gw.chips[mid] || {};
+      setTripleFixture(mid, chip.tripleFixtureId===fxId ? "" : fxId);
+    });
+  });
+  document.querySelectorAll('[data-prize]').forEach(el=>{
+    el.addEventListener('change', e=> updatePrize(e.target.dataset.prize, e.target.value));
+  });
+  document.querySelectorAll('[data-removefx]').forEach(el=>{
+    el.addEventListener('click', e=> removeFixture(e.currentTarget.dataset.removefx));
+  });
+  document.querySelectorAll('[data-rename]').forEach(el=>{
+    el.addEventListener('change', e=> renameMember(e.target.dataset.rename, e.target.value));
+  });
+  document.querySelectorAll('[data-removemember]').forEach(el=>{
+    el.addEventListener('click', e=> removeMember(e.currentTarget.dataset.removemember));
+  });
+}
+function onAddFixture(){
+  const home = document.getElementById("newFxHome").value;
+  const away = document.getElementById("newFxAway").value;
+  addFixture(home, away);
+  render();
+}
+function onAddMember(){
+  addMember(document.getElementById("newMemberName").value);
+}
+function changeGW(delta){ gwNum = Math.min(TOTAL_GAMEWEEKS, Math.max(1, gwNum+delta)); render(); }
+function jumpGW(v){ gwNum = +v; render(); }
+
+// ---------- boot ----------
+(async function(){
+  await loadData();
+  render();
+})();
+
+// Home Screen web apps often just "resume" the page instead of doing a
+// fresh reload when reopened, so the tab can sit on stale data for hours.
+// Force a re-check whenever the app becomes visible again, plus a periodic
+// poll while it stays open — both scoped to View Only mode so an editor's
+// unpublished changes are never silently overwritten.
+async function refreshIfViewer(){
+  if(isEditor) return;
+  try{
+    const res = await fetch('./data.json?t=' + Date.now());
+    DATA = await res.json();
+    render();
+  }catch(e){
+    // ignore transient failures, next check will retry
+  }
+}
+document.addEventListener('visibilitychange', () => {
+  if(document.visibilityState === 'visible') refreshIfViewer();
+});
+setInterval(refreshIfViewer, 20000);
+</script>
+</body>
+</html>
