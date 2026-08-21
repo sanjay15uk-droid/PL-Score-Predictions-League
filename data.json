@@ -1187,6 +1187,90 @@
             "home": "0",
             "away": "2"
           }
+        },
+        "m_ztdegjm": {
+          "fx_i519sz9": {
+            "home": "4",
+            "away": "0"
+          },
+          "fx_q6jrs01": {
+            "home": "0",
+            "away": "3"
+          },
+          "fx_fqbqyau": {
+            "home": "0",
+            "away": "0"
+          },
+          "fx_gcrzlrj": {
+            "home": "0",
+            "away": "2"
+          },
+          "fx_7dg08zj": {
+            "home": "1",
+            "away": "1"
+          },
+          "fx_ar09orc": {
+            "home": "1",
+            "away": "1"
+          },
+          "fx_trhvrf3": {
+            "home": "1",
+            "away": "3"
+          },
+          "fx_gtc5slw": {
+            "home": "2",
+            "away": "1"
+          },
+          "fx_0g9uxuv": {
+            "home": "1",
+            "away": "2"
+          },
+          "fx_slb9xmi": {
+            "home": "0",
+            "away": "3"
+          }
+        },
+        "m_13": {
+          "fx_i519sz9": {
+            "home": "3",
+            "away": "0"
+          },
+          "fx_q6jrs01": {
+            "home": "0",
+            "away": "2"
+          },
+          "fx_fqbqyau": {
+            "home": "1",
+            "away": "1"
+          },
+          "fx_gcrzlrj": {
+            "home": "1",
+            "away": "2"
+          },
+          "fx_7dg08zj": {
+            "home": "2",
+            "away": "1"
+          },
+          "fx_ar09orc": {
+            "home": "1",
+            "away": "2"
+          },
+          "fx_trhvrf3": {
+            "home": "1",
+            "away": "2"
+          },
+          "fx_gtc5slw": {
+            "home": "3",
+            "away": "1"
+          },
+          "fx_0g9uxuv": {
+            "home": "2",
+            "away": "2"
+          },
+          "fx_slb9xmi": {
+            "home": "1",
+            "away": "2"
+          }
         }
       },
       "chips": {
@@ -1197,6 +1281,10 @@
         "m_14": {
           "double": true,
           "tripleFixtureId": null
+        },
+        "m_03": {
+          "double": false,
+          "tripleFixtureId": "fx_i519sz9"
         }
       }
     }
