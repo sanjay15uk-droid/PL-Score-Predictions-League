@@ -99,6 +99,10 @@
     {
       "id": "m_z5zkffs",
       "name": "Matthew Parrot"
+    },
+    {
+      "id": "m_ztdegjm",
+      "name": "Philip Popham"
     }
   ],
   "gameweeks": {
@@ -1199,8 +1203,8 @@
   },
   "prize": {
     "entryFee": 76,
-    "first": 1000,
-    "second": 450,
-    "third": 298
+    "first": 1200,
+    "second": 476,
+    "third": 300
   }
 }
