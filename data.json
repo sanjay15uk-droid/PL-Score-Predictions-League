@@ -2327,6 +2327,48 @@
             "home": "1",
             "away": "2"
           }
+        },
+        "m_02": {
+          "fx_enkgxff": {
+            "home": "1",
+            "away": "2"
+          },
+          "fx_e4jb2q9": {
+            "home": "2",
+            "away": "0"
+          },
+          "fx_vrrl0t5": {
+            "home": "2",
+            "away": "0"
+          },
+          "fx_l3gldek": {
+            "home": "1",
+            "away": "0"
+          },
+          "fx_b9qym7u": {
+            "home": "1",
+            "away": "1"
+          },
+          "fx_dbf512r": {
+            "home": "2",
+            "away": "1"
+          },
+          "fx_fx44f6t": {
+            "home": "1",
+            "away": "2"
+          },
+          "fx_xqvc5fa": {
+            "home": "1",
+            "away": "0"
+          },
+          "fx_2oe2lhg": {
+            "home": "2",
+            "away": "0"
+          },
+          "fx_sxu6cnq": {
+            "home": "1",
+            "away": "2"
+          }
         }
       },
       "chips": {}
