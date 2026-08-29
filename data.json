@@ -1294,29 +1294,29 @@
           "id": "fx_enkgxff",
           "home": "Crystal Palace",
           "away": "Manchester City",
-          "actualHome": "",
-          "actualAway": ""
+          "actualHome": "1",
+          "actualAway": "4"
         },
         {
           "id": "fx_e4jb2q9",
           "home": "Liverpool",
           "away": "Nottingham Forest",
-          "actualHome": "",
-          "actualAway": ""
+          "actualHome": "2",
+          "actualAway": "2"
         },
         {
           "id": "fx_vrrl0t5",
           "home": "Bournemouth",
           "away": "Everton",
-          "actualHome": "",
-          "actualAway": ""
+          "actualHome": "1",
+          "actualAway": "1"
         },
         {
           "id": "fx_l3gldek",
           "home": "Coventry",
           "away": "Hull",
-          "actualHome": "",
-          "actualAway": ""
+          "actualHome": "0",
+          "actualAway": "1"
         },
         {
           "id": "fx_b9qym7u",
