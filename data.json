@@ -1357,8 +1357,8 @@
           "id": "fx_sxu6cnq",
           "home": "Aston Villa",
           "away": "Arsenal",
-          "actualHome": "",
-          "actualAway": ""
+          "actualHome": "0",
+          "actualAway": "1"
         }
       ],
       "predictions": {
