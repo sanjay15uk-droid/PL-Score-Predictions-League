@@ -2456,6 +2456,82 @@
         }
       },
       "chips": {}
+    },
+    "3": {
+      "fixtures": [
+        {
+          "id": "fx_plv12wt",
+          "home": "Ipswich",
+          "away": "Liverpool",
+          "actualHome": "",
+          "actualAway": ""
+        },
+        {
+          "id": "fx_rek2xnz",
+          "home": "Newcastle",
+          "away": "Bournemouth",
+          "actualHome": "",
+          "actualAway": ""
+        },
+        {
+          "id": "fx_pn03tv1",
+          "home": "Brentford",
+          "away": "Sunderland",
+          "actualHome": "",
+          "actualAway": ""
+        },
+        {
+          "id": "fx_64tygeo",
+          "home": "Brighton",
+          "away": "Leeds",
+          "actualHome": "",
+          "actualAway": ""
+        },
+        {
+          "id": "fx_pha9md6",
+          "home": "Fulham",
+          "away": "Crystal Palace",
+          "actualHome": "",
+          "actualAway": ""
+        },
+        {
+          "id": "fx_qmlzakf",
+          "home": "Man City",
+          "away": "Coventry",
+          "actualHome": "",
+          "actualAway": ""
+        },
+        {
+          "id": "fx_0zd4iy0",
+          "home": "Nottingham Forest",
+          "away": "Spurs",
+          "actualHome": "",
+          "actualAway": ""
+        },
+        {
+          "id": "fx_ym5dh2j",
+          "home": "Hull",
+          "away": "Aston Villa",
+          "actualHome": "",
+          "actualAway": ""
+        },
+        {
+          "id": "fx_3ilvre0",
+          "home": "Everton",
+          "away": "Man Utd",
+          "actualHome": "",
+          "actualAway": ""
+        },
+        {
+          "id": "fx_m0ub4k3",
+          "home": "Arsenal",
+          "away": "Chelsea",
+          "actualHome": "",
+          "actualAway": ""
+        }
+      ],
+      "predictions": {},
+      "chips": {}
     }
   },
   "prize": {
