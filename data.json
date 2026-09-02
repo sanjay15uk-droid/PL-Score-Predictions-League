@@ -2968,6 +2968,10 @@
         "m_17": {
           "double": true,
           "tripleFixtureId": null
+        },
+        "m_03": {
+          "double": true,
+          "tripleFixtureId": null
         }
       }
     }
