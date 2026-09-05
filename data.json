@@ -2484,29 +2484,29 @@
           "id": "fx_64tygeo",
           "home": "Brighton",
           "away": "Leeds",
-          "actualHome": "",
-          "actualAway": ""
+          "actualHome": "1",
+          "actualAway": "1"
         },
         {
           "id": "fx_pha9md6",
           "home": "Fulham",
           "away": "Crystal Palace",
-          "actualHome": "",
-          "actualAway": ""
+          "actualHome": "2",
+          "actualAway": "3"
         },
         {
           "id": "fx_qmlzakf",
           "home": "Man City",
           "away": "Coventry",
-          "actualHome": "",
-          "actualAway": ""
+          "actualHome": "1",
+          "actualAway": "0"
         },
         {
           "id": "fx_0zd4iy0",
           "home": "Nottingham Forest",
           "away": "Spurs",
-          "actualHome": "",
-          "actualAway": ""
+          "actualHome": "0",
+          "actualAway": "0"
         },
         {
           "id": "fx_ym5dh2j",
