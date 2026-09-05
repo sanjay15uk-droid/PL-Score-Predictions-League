@@ -3656,6 +3656,10 @@
         "m_z5zkffs": {
           "double": false,
           "tripleFixtureId": null
+        },
+        "m_20": {
+          "double": false,
+          "tripleFixtureId": "fx_m0ub4k3"
         }
       }
     }
