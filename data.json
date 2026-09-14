@@ -4840,6 +4840,82 @@
           "tripleFixtureId": null
         }
       }
+    },
+    "5": {
+      "fixtures": [
+        {
+          "id": "fx_ahjm9zz",
+          "home": "Brentford",
+          "away": "Chelsea",
+          "actualHome": "",
+          "actualAway": ""
+        },
+        {
+          "id": "fx_mx36dvr",
+          "home": "Spurs",
+          "away": "Aston Villa",
+          "actualHome": "",
+          "actualAway": ""
+        },
+        {
+          "id": "fx_53bp3ga",
+          "home": "Brighton",
+          "away": "Arsenal",
+          "actualHome": "",
+          "actualAway": ""
+        },
+        {
+          "id": "fx_4yxquut",
+          "home": "Everton",
+          "away": "Ipswich",
+          "actualHome": "",
+          "actualAway": ""
+        },
+        {
+          "id": "fx_ve2hkgh",
+          "home": "Newcastle",
+          "away": "Hull",
+          "actualHome": "",
+          "actualAway": ""
+        },
+        {
+          "id": "fx_8b3mpgs",
+          "home": "Nottingham Forest",
+          "away": "Coventry",
+          "actualHome": "",
+          "actualAway": ""
+        },
+        {
+          "id": "fx_wxryowa",
+          "home": "Bournemouth",
+          "away": "Liverpool",
+          "actualHome": "",
+          "actualAway": ""
+        },
+        {
+          "id": "fx_72pb595",
+          "home": "Leeds",
+          "away": "Crystal Palace",
+          "actualHome": "",
+          "actualAway": ""
+        },
+        {
+          "id": "fx_e0xxuxq",
+          "home": "Man City",
+          "away": "Sunderland",
+          "actualHome": "",
+          "actualAway": ""
+        },
+        {
+          "id": "fx_9fx5z8v",
+          "home": "Fulham",
+          "away": "Man Utd",
+          "actualHome": "",
+          "actualAway": ""
+        }
+      ],
+      "predictions": {},
+      "chips": {}
     }
   },
   "prize": {
@@ -4858,5 +4934,5 @@
     "m_19": 20,
     "m_05": 20
   },
-  "currentGameweek": 4
+  "currentGameweek": 5
 }
