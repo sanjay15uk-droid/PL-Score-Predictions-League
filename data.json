@@ -5544,9 +5544,98 @@
             "home": "1",
             "away": "2"
           }
+        },
+        "m_06": {
+          "fx_ahjm9zz": {
+            "home": "1",
+            "away": "2"
+          },
+          "fx_mx36dvr": {
+            "home": "1",
+            "away": "2"
+          },
+          "fx_53bp3ga": {
+            "home": "2",
+            "away": "2"
+          },
+          "fx_4yxquut": {
+            "home": "2",
+            "away": "0"
+          },
+          "fx_ve2hkgh": {
+            "home": "3",
+            "away": "1"
+          },
+          "fx_8b3mpgs": {
+            "home": "1",
+            "away": "0"
+          },
+          "fx_wxryowa": {
+            "home": "1",
+            "away": "1"
+          },
+          "fx_72pb595": {
+            "home": "1",
+            "away": "1"
+          },
+          "fx_e0xxuxq": {
+            "home": "2",
+            "away": "0"
+          },
+          "fx_9fx5z8v": {
+            "home": "0",
+            "away": "3"
+          }
+        },
+        "m_15": {
+          "fx_ahjm9zz": {
+            "home": "2",
+            "away": "3"
+          },
+          "fx_mx36dvr": {
+            "home": "1",
+            "away": "1"
+          },
+          "fx_53bp3ga": {
+            "home": "2",
+            "away": "1"
+          },
+          "fx_4yxquut": {
+            "home": "2",
+            "away": "1"
+          },
+          "fx_ve2hkgh": {
+            "home": "1",
+            "away": "2"
+          },
+          "fx_8b3mpgs": {
+            "home": "2",
+            "away": "0"
+          },
+          "fx_wxryowa": {
+            "home": "2",
+            "away": "2"
+          },
+          "fx_72pb595": {
+            "home": "2",
+            "away": "1"
+          },
+          "fx_e0xxuxq": {
+            "home": "3",
+            "away": "0"
+          },
+          "fx_9fx5z8v": {
+            "home": "0",
+            "away": "2"
+          }
         }
       },
-      "chips": {}
+      "chips": {
+        "m_ivspfdr": {
+          "double": true,
+          "tripleFixtureId": null
+        }
+      }
     }
   },
   "prize": {
