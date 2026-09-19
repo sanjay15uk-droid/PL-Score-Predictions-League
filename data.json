@@ -4861,22 +4861,22 @@
           "id": "fx_53bp3ga",
           "home": "Brighton",
           "away": "Arsenal",
-          "actualHome": "",
-          "actualAway": ""
+          "actualHome": "3",
+          "actualAway": "0"
         },
         {
           "id": "fx_4yxquut",
           "home": "Everton",
           "away": "Ipswich",
-          "actualHome": "",
-          "actualAway": ""
+          "actualHome": "1",
+          "actualAway": "0"
         },
         {
           "id": "fx_ve2hkgh",
           "home": "Newcastle",
           "away": "Hull",
-          "actualHome": "",
-          "actualAway": ""
+          "actualHome": "2",
+          "actualAway": "1"
         },
         {
           "id": "fx_8b3mpgs",
