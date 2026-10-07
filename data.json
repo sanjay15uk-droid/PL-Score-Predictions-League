@@ -6023,6 +6023,69 @@
           "away": "Leeds",
           "actualHome": "",
           "actualAway": ""
+        },
+        {
+          "id": "fx_di00ydo",
+          "home": "Aston Villa",
+          "away": "Brentford",
+          "actualHome": "",
+          "actualAway": ""
+        },
+        {
+          "id": "fx_xpvu28u",
+          "home": "Chelsea",
+          "away": "Bournemouth",
+          "actualHome": "",
+          "actualAway": ""
+        },
+        {
+          "id": "fx_f0i92mn",
+          "home": "Ipswich",
+          "away": "Fulham",
+          "actualHome": "",
+          "actualAway": ""
+        },
+        {
+          "id": "fx_y9qim3o",
+          "home": "Sunderland",
+          "away": "Brighton",
+          "actualHome": "",
+          "actualAway": ""
+        },
+        {
+          "id": "fx_k1xome4",
+          "home": "Manchester United",
+          "away": "Spurs",
+          "actualHome": "",
+          "actualAway": ""
+        },
+        {
+          "id": "fx_8sc58ze",
+          "home": "Crystal Palace",
+          "away": "Nottingham Forest",
+          "actualHome": "",
+          "actualAway": ""
+        },
+        {
+          "id": "fx_fia6nl6",
+          "home": "Hull",
+          "away": "Everton",
+          "actualHome": "",
+          "actualAway": ""
+        },
+        {
+          "id": "fx_xm5epwx",
+          "home": "Liverpool",
+          "away": "Manchester City",
+          "actualHome": "",
+          "actualAway": ""
+        },
+        {
+          "id": "fx_ivm7oxk",
+          "home": "Coventry",
+          "away": "Newcastle",
+          "actualHome": "",
+          "actualAway": ""
         }
       ],
       "predictions": {},
