@@ -6014,6 +6014,19 @@
           "tripleFixtureId": null
         }
       }
+    },
+    "6": {
+      "fixtures": [
+        {
+          "id": "fx_nimzv2e",
+          "home": "Arsenal",
+          "away": "Leeds",
+          "actualHome": "",
+          "actualAway": ""
+        }
+      ],
+      "predictions": {},
+      "chips": {}
     }
   },
   "prize": {
