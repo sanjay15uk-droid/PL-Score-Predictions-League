@@ -6033,7 +6033,9 @@
     "m_05": 30,
     "m_03": 10,
     "m_02": 10,
-    "m_01": 10
+    "m_01": 10,
+    "m_20": 10,
+    "m_ivspfdr": 10
   },
-  "currentGameweek": 5
+  "currentGameweek": 6
 }
