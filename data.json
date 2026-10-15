@@ -7183,6 +7183,82 @@
         }
       },
       "chips": {}
+    },
+    "7": {
+      "fixtures": [
+        {
+          "id": "fx_xpttdn3",
+          "home": "Everton",
+          "away": "Chelsea",
+          "actualHome": "",
+          "actualAway": ""
+        },
+        {
+          "id": "fx_fg3xhtv",
+          "home": "Brentford",
+          "away": "Liverpool",
+          "actualHome": "",
+          "actualAway": ""
+        },
+        {
+          "id": "fx_1xldzlv",
+          "home": "Fulham",
+          "away": "Hull City",
+          "actualHome": "",
+          "actualAway": ""
+        },
+        {
+          "id": "fx_fzo2tia",
+          "home": "Man City",
+          "away": "Ipswich",
+          "actualHome": "",
+          "actualAway": ""
+        },
+        {
+          "id": "fx_7261q97",
+          "home": "Newcastle",
+          "away": "Aston Villa",
+          "actualHome": "",
+          "actualAway": ""
+        },
+        {
+          "id": "fx_m1i2f9w",
+          "home": "Bournemouth",
+          "away": "Sunderland",
+          "actualHome": "",
+          "actualAway": ""
+        },
+        {
+          "id": "fx_eahx941",
+          "home": "Brighton",
+          "away": "Crystal Palace",
+          "actualHome": "",
+          "actualAway": ""
+        },
+        {
+          "id": "fx_bze007h",
+          "home": "Leeds",
+          "away": "Manchester United",
+          "actualHome": "",
+          "actualAway": ""
+        },
+        {
+          "id": "fx_x20uuma",
+          "home": "Nottingham Forest",
+          "away": "Arsenal",
+          "actualHome": "",
+          "actualAway": ""
+        },
+        {
+          "id": "fx_qbrohnv",
+          "home": "Spurs",
+          "away": "Coventry City",
+          "actualHome": "",
+          "actualAway": ""
+        }
+      ],
+      "predictions": {},
+      "chips": {}
     }
   },
   "prize": {
@@ -7218,5 +7294,5 @@
     "m_85gsly9": 10,
     "m_15": 10
   },
-  "currentGameweek": 6
+  "currentGameweek": 7
 }
