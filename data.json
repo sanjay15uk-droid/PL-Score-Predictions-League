@@ -8361,6 +8361,82 @@
           "tripleFixtureId": "fx_fzo2tia"
         }
       }
+    },
+    "8": {
+      "fixtures": [
+        {
+          "id": "fx_tufzjys",
+          "home": "Ipswich",
+          "away": "Nottingham Forest",
+          "actualHome": "",
+          "actualAway": ""
+        },
+        {
+          "id": "fx_wxe7488",
+          "home": "Aston Villa",
+          "away": "Man City",
+          "actualHome": "",
+          "actualAway": ""
+        },
+        {
+          "id": "fx_22qmz64",
+          "home": "Arsenal",
+          "away": "Everton",
+          "actualHome": "",
+          "actualAway": ""
+        },
+        {
+          "id": "fx_17qvhkg",
+          "home": "Coventry",
+          "away": "Fulham",
+          "actualHome": "",
+          "actualAway": ""
+        },
+        {
+          "id": "fx_mgaqmqv",
+          "home": "Chelsea",
+          "away": "Spurs",
+          "actualHome": "",
+          "actualAway": ""
+        },
+        {
+          "id": "fx_4jgx207",
+          "home": "Crystal Palace",
+          "away": "Newcastle",
+          "actualHome": "",
+          "actualAway": ""
+        },
+        {
+          "id": "fx_wlfmgpu",
+          "home": "Hull City",
+          "away": "Brentford",
+          "actualHome": "",
+          "actualAway": ""
+        },
+        {
+          "id": "fx_bmndmjx",
+          "home": "Liverpool",
+          "away": "Brighton",
+          "actualHome": "",
+          "actualAway": ""
+        },
+        {
+          "id": "fx_jvrnkfc",
+          "home": "Man Utd",
+          "away": "Bournemouth",
+          "actualHome": "",
+          "actualAway": ""
+        },
+        {
+          "id": "fx_v5z9l7i",
+          "home": "Sunderland",
+          "away": "Leeds",
+          "actualHome": "",
+          "actualAway": ""
+        }
+      ],
+      "predictions": {},
+      "chips": {}
     }
   },
   "prize": {
@@ -8396,5 +8472,5 @@
     "m_85gsly9": 10,
     "m_15": 10
   },
-  "currentGameweek": 7
+  "currentGameweek": 8
 }
