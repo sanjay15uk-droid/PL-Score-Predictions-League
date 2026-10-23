@@ -9485,6 +9485,48 @@
             "home": "0",
             "away": "1"
           }
+        },
+        "m_09": {
+          "fx_tufzjys": {
+            "home": "1",
+            "away": "1"
+          },
+          "fx_wxe7488": {
+            "home": "2",
+            "away": "2"
+          },
+          "fx_22qmz64": {
+            "home": "2",
+            "away": "0"
+          },
+          "fx_17qvhkg": {
+            "home": "1",
+            "away": "2"
+          },
+          "fx_mgaqmqv": {
+            "home": "2",
+            "away": "1"
+          },
+          "fx_4jgx207": {
+            "home": "1",
+            "away": "2"
+          },
+          "fx_wlfmgpu": {
+            "home": "1",
+            "away": "2"
+          },
+          "fx_bmndmjx": {
+            "home": "2",
+            "away": "3"
+          },
+          "fx_jvrnkfc": {
+            "home": "2",
+            "away": "1"
+          },
+          "fx_v5z9l7i": {
+            "home": "0",
+            "away": "3"
+          }
         }
       },
       "chips": {
