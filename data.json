@@ -8855,11 +8855,57 @@
             "home": "1",
             "away": "2"
           }
+        },
+        "m_z5zkffs": {
+          "fx_tufzjys": {
+            "home": "2",
+            "away": "1"
+          },
+          "fx_wxe7488": {
+            "home": "1",
+            "away": "2"
+          },
+          "fx_22qmz64": {
+            "home": "2",
+            "away": "0"
+          },
+          "fx_17qvhkg": {
+            "home": "2",
+            "away": "1"
+          },
+          "fx_mgaqmqv": {
+            "home": "2",
+            "away": "1"
+          },
+          "fx_4jgx207": {
+            "home": "2",
+            "away": "2"
+          },
+          "fx_wlfmgpu": {
+            "home": "1",
+            "away": "2"
+          },
+          "fx_bmndmjx": {
+            "home": "2",
+            "away": "1"
+          },
+          "fx_jvrnkfc": {
+            "home": "2",
+            "away": "2"
+          },
+          "fx_v5z9l7i": {
+            "home": "1",
+            "away": "0"
+          }
         }
       },
       "chips": {
         "m_20": {
           "double": true,
+          "tripleFixtureId": null
+        },
+        "m_z5zkffs": {
+          "double": false,
           "tripleFixtureId": null
         }
       }
