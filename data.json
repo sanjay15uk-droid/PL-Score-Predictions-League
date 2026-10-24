@@ -8382,15 +8382,15 @@
           "id": "fx_22qmz64",
           "home": "Arsenal",
           "away": "Everton",
-          "actualHome": "",
-          "actualAway": ""
+          "actualHome": "2",
+          "actualAway": "0"
         },
         {
           "id": "fx_17qvhkg",
           "home": "Coventry",
           "away": "Fulham",
-          "actualHome": "",
-          "actualAway": ""
+          "actualHome": "0",
+          "actualAway": "1"
         },
         {
           "id": "fx_mgaqmqv",
