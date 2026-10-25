@@ -8403,29 +8403,29 @@
           "id": "fx_4jgx207",
           "home": "Crystal Palace",
           "away": "Newcastle",
-          "actualHome": "",
-          "actualAway": ""
+          "actualHome": "0",
+          "actualAway": "2"
         },
         {
           "id": "fx_wlfmgpu",
           "home": "Hull City",
           "away": "Brentford",
-          "actualHome": "",
-          "actualAway": ""
+          "actualHome": "1",
+          "actualAway": "1"
         },
         {
           "id": "fx_bmndmjx",
           "home": "Liverpool",
           "away": "Brighton",
-          "actualHome": "",
-          "actualAway": ""
+          "actualHome": "2",
+          "actualAway": "0"
         },
         {
           "id": "fx_jvrnkfc",
           "home": "Man Utd",
           "away": "Bournemouth",
-          "actualHome": "",
-          "actualAway": ""
+          "actualHome": "0",
+          "actualAway": "3"
         },
         {
           "id": "fx_v5z9l7i",
