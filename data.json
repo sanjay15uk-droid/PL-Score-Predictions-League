@@ -8431,8 +8431,8 @@
           "id": "fx_v5z9l7i",
           "home": "Sunderland",
           "away": "Leeds",
-          "actualHome": "",
-          "actualAway": ""
+          "actualHome": "0",
+          "actualAway": "0"
         }
       ],
       "predictions": {
