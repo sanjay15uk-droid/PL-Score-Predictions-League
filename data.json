@@ -9539,6 +9539,82 @@
           "tripleFixtureId": null
         }
       }
+    },
+    "9": {
+      "fixtures": [
+        {
+          "id": "fx_120h1ua",
+          "home": "Chelsea",
+          "away": "Manchester United",
+          "actualHome": "",
+          "actualAway": ""
+        },
+        {
+          "id": "fx_09jqhet",
+          "home": "Bournemouth",
+          "away": "Leeds",
+          "actualHome": "",
+          "actualAway": ""
+        },
+        {
+          "id": "fx_eos9o0o",
+          "home": "Brentford",
+          "away": "Nottingham Forest",
+          "actualHome": "",
+          "actualAway": ""
+        },
+        {
+          "id": "fx_rkljcj4",
+          "home": "Coventry",
+          "away": "Sunderland",
+          "actualHome": "",
+          "actualAway": ""
+        },
+        {
+          "id": "fx_q79dl59",
+          "home": "Hull",
+          "away": "Ipswich",
+          "actualHome": "",
+          "actualAway": ""
+        },
+        {
+          "id": "fx_5ovtqg6",
+          "home": "Man City",
+          "away": "Brighton",
+          "actualHome": "",
+          "actualAway": ""
+        },
+        {
+          "id": "fx_g1ej3du",
+          "home": "Tottenham",
+          "away": "Crystal Palace",
+          "actualHome": "",
+          "actualAway": ""
+        },
+        {
+          "id": "fx_19dgn7j",
+          "home": "Aston Villa",
+          "away": "Fulham",
+          "actualHome": "",
+          "actualAway": ""
+        },
+        {
+          "id": "fx_144l8dk",
+          "home": "Liverpool",
+          "away": "Arsenal",
+          "actualHome": "",
+          "actualAway": ""
+        },
+        {
+          "id": "fx_ms5gaj0",
+          "home": "Newcastle",
+          "away": "Everton",
+          "actualHome": "",
+          "actualAway": ""
+        }
+      ],
+      "predictions": {},
+      "chips": {}
     }
   },
   "prize": {
@@ -9574,5 +9650,5 @@
     "m_85gsly9": 10,
     "m_15": 10
   },
-  "currentGameweek": 8
+  "currentGameweek": 9
 }
