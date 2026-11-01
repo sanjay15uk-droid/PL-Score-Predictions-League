@@ -9602,8 +9602,8 @@
           "id": "fx_144l8dk",
           "home": "Liverpool",
           "away": "Arsenal",
-          "actualHome": "",
-          "actualAway": ""
+          "actualHome": "0",
+          "actualAway": "1"
         },
         {
           "id": "fx_ms5gaj0",
