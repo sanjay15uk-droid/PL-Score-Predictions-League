@@ -9609,8 +9609,8 @@
           "id": "fx_ms5gaj0",
           "home": "Newcastle",
           "away": "Everton",
-          "actualHome": "",
-          "actualAway": ""
+          "actualHome": "0",
+          "actualAway": "1"
         }
       ],
       "predictions": {
