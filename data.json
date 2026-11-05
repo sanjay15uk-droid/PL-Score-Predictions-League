@@ -10782,8 +10782,560 @@
           "actualAway": ""
         }
       ],
-      "predictions": {},
-      "chips": {}
+      "predictions": {
+        "m_04": {
+          "fx_fwz9s5m": {
+            "home": "2",
+            "away": "0"
+          },
+          "fx_j1cgbud": {
+            "home": "2",
+            "away": "2"
+          },
+          "fx_8yxws4b": {
+            "home": "3",
+            "away": "1"
+          },
+          "fx_15xsjhs": {
+            "home": "2",
+            "away": "1"
+          },
+          "fx_369dxxv": {
+            "home": "2",
+            "away": "2"
+          },
+          "fx_bkqs7d6": {
+            "home": "3",
+            "away": "2"
+          },
+          "fx_da3nene": {
+            "home": "0",
+            "away": "2"
+          },
+          "fx_m6b6nho": {
+            "home": "1",
+            "away": "1"
+          },
+          "fx_yortbgc": {
+            "home": "3",
+            "away": "3"
+          },
+          "fx_jvrrq9i": {
+            "home": "2",
+            "away": "1"
+          }
+        },
+        "m_12": {
+          "fx_fwz9s5m": {
+            "home": "2",
+            "away": "0"
+          },
+          "fx_j1cgbud": {
+            "home": "1",
+            "away": "2"
+          },
+          "fx_8yxws4b": {
+            "home": "3",
+            "away": "0"
+          },
+          "fx_15xsjhs": {
+            "home": "2",
+            "away": "1"
+          },
+          "fx_369dxxv": {
+            "home": "0",
+            "away": "2"
+          },
+          "fx_bkqs7d6": {
+            "home": "2",
+            "away": "0"
+          },
+          "fx_da3nene": {
+            "home": "0",
+            "away": "2"
+          },
+          "fx_m6b6nho": {
+            "home": "1",
+            "away": "2"
+          },
+          "fx_yortbgc": {
+            "home": "0",
+            "away": "3"
+          },
+          "fx_jvrrq9i": {
+            "home": "2",
+            "away": "2"
+          }
+        },
+        "m_20": {
+          "fx_fwz9s5m": {
+            "home": "2",
+            "away": "1"
+          },
+          "fx_j1cgbud": {
+            "home": "1",
+            "away": "1"
+          },
+          "fx_8yxws4b": {
+            "home": "3",
+            "away": "0"
+          },
+          "fx_15xsjhs": {
+            "home": "2",
+            "away": "0"
+          },
+          "fx_369dxxv": {
+            "home": "1",
+            "away": "2"
+          },
+          "fx_bkqs7d6": {
+            "home": "2",
+            "away": "1"
+          },
+          "fx_da3nene": {
+            "home": "0",
+            "away": "2"
+          },
+          "fx_m6b6nho": {
+            "home": "1",
+            "away": "1"
+          },
+          "fx_yortbgc": {
+            "home": "0",
+            "away": "3"
+          },
+          "fx_jvrrq9i": {
+            "home": "1",
+            "away": "1"
+          }
+        },
+        "m_18": {
+          "fx_fwz9s5m": {
+            "home": "2",
+            "away": "1"
+          },
+          "fx_j1cgbud": {
+            "home": "1",
+            "away": "2"
+          },
+          "fx_8yxws4b": {
+            "home": "2",
+            "away": "0"
+          },
+          "fx_15xsjhs": {
+            "home": "1",
+            "away": "0"
+          },
+          "fx_369dxxv": {
+            "home": "1",
+            "away": "3"
+          },
+          "fx_bkqs7d6": {
+            "home": "1",
+            "away": "1"
+          },
+          "fx_da3nene": {
+            "home": "0",
+            "away": "2"
+          },
+          "fx_m6b6nho": {
+            "home": "1",
+            "away": "2"
+          },
+          "fx_yortbgc": {
+            "home": "0",
+            "away": "2"
+          },
+          "fx_jvrrq9i": {
+            "home": "1",
+            "away": "1"
+          }
+        },
+        "m_11": {
+          "fx_fwz9s5m": {
+            "home": "2",
+            "away": "0"
+          },
+          "fx_j1cgbud": {
+            "home": "0",
+            "away": "1"
+          },
+          "fx_8yxws4b": {
+            "home": "3",
+            "away": "0"
+          },
+          "fx_15xsjhs": {
+            "home": "0",
+            "away": "1"
+          },
+          "fx_369dxxv": {
+            "home": "0",
+            "away": "3"
+          },
+          "fx_bkqs7d6": {
+            "home": "2",
+            "away": "1"
+          },
+          "fx_da3nene": {
+            "home": "1",
+            "away": "2"
+          },
+          "fx_m6b6nho": {
+            "home": "2",
+            "away": "2"
+          },
+          "fx_yortbgc": {
+            "home": "0",
+            "away": "2"
+          },
+          "fx_jvrrq9i": {
+            "home": "2",
+            "away": "1"
+          }
+        },
+        "m_10": {
+          "fx_fwz9s5m": {
+            "home": "1",
+            "away": "0"
+          },
+          "fx_j1cgbud": {
+            "home": "1",
+            "away": "1"
+          },
+          "fx_8yxws4b": {
+            "home": "2",
+            "away": "0"
+          },
+          "fx_15xsjhs": {
+            "home": "1",
+            "away": "0"
+          },
+          "fx_369dxxv": {
+            "home": "0",
+            "away": "4"
+          },
+          "fx_bkqs7d6": {
+            "home": "2",
+            "away": "1"
+          },
+          "fx_da3nene": {
+            "home": "1",
+            "away": "2"
+          },
+          "fx_m6b6nho": {
+            "home": "2",
+            "away": "2"
+          },
+          "fx_yortbgc": {
+            "home": "1",
+            "away": "3"
+          },
+          "fx_jvrrq9i": {
+            "home": "1",
+            "away": "2"
+          }
+        },
+        "m_03": {
+          "fx_fwz9s5m": {
+            "home": "1",
+            "away": "0"
+          },
+          "fx_j1cgbud": {
+            "home": "0",
+            "away": "0"
+          },
+          "fx_8yxws4b": {
+            "home": "2",
+            "away": "0"
+          },
+          "fx_15xsjhs": {
+            "home": "1",
+            "away": "1"
+          },
+          "fx_369dxxv": {
+            "home": "0",
+            "away": "2"
+          },
+          "fx_bkqs7d6": {
+            "home": "2",
+            "away": "1"
+          },
+          "fx_da3nene": {
+            "home": "1",
+            "away": "2"
+          },
+          "fx_m6b6nho": {
+            "home": "0",
+            "away": "2"
+          },
+          "fx_yortbgc": {
+            "home": "0",
+            "away": "2"
+          },
+          "fx_jvrrq9i": {
+            "home": "1",
+            "away": "1"
+          }
+        },
+        "m_17": {
+          "fx_fwz9s5m": {
+            "home": "2",
+            "away": "1"
+          },
+          "fx_j1cgbud": {
+            "home": "1",
+            "away": "1"
+          },
+          "fx_8yxws4b": {
+            "home": "3",
+            "away": "1"
+          },
+          "fx_15xsjhs": {
+            "home": "2",
+            "away": "1"
+          },
+          "fx_369dxxv": {
+            "home": "0",
+            "away": "2"
+          },
+          "fx_bkqs7d6": {
+            "home": "2",
+            "away": "1"
+          },
+          "fx_da3nene": {
+            "home": "1",
+            "away": "1"
+          },
+          "fx_m6b6nho": {
+            "home": "1",
+            "away": "2"
+          },
+          "fx_yortbgc": {
+            "home": "0",
+            "away": "2"
+          },
+          "fx_jvrrq9i": {
+            "home": "1",
+            "away": "1"
+          }
+        },
+        "m_01": {
+          "fx_fwz9s5m": {
+            "home": "2",
+            "away": "0"
+          },
+          "fx_j1cgbud": {
+            "home": "1",
+            "away": "2"
+          },
+          "fx_8yxws4b": {
+            "home": "2",
+            "away": "1"
+          },
+          "fx_15xsjhs": {
+            "home": "2",
+            "away": "0"
+          },
+          "fx_369dxxv": {
+            "home": "2",
+            "away": "3"
+          },
+          "fx_bkqs7d6": {
+            "home": "2",
+            "away": "0"
+          },
+          "fx_da3nene": {
+            "home": "1",
+            "away": "3"
+          },
+          "fx_m6b6nho": {
+            "home": "1",
+            "away": "2"
+          },
+          "fx_yortbgc": {
+            "home": "1",
+            "away": "2"
+          },
+          "fx_jvrrq9i": {
+            "home": "2",
+            "away": "1"
+          }
+        },
+        "m_16": {
+          "fx_fwz9s5m": {
+            "home": "1",
+            "away": "0"
+          },
+          "fx_j1cgbud": {
+            "home": "0",
+            "away": "1"
+          },
+          "fx_8yxws4b": {
+            "home": "3",
+            "away": "0"
+          },
+          "fx_15xsjhs": {
+            "home": "0",
+            "away": "2"
+          },
+          "fx_369dxxv": {
+            "home": "1",
+            "away": "2"
+          },
+          "fx_bkqs7d6": {
+            "home": "1",
+            "away": "1"
+          },
+          "fx_da3nene": {
+            "home": "0",
+            "away": "1"
+          },
+          "fx_m6b6nho": {
+            "home": "0",
+            "away": "1"
+          },
+          "fx_yortbgc": {
+            "home": "0",
+            "away": "2"
+          },
+          "fx_jvrrq9i": {
+            "home": "0",
+            "away": "1"
+          }
+        },
+        "m_z42rpvd": {
+          "fx_fwz9s5m": {
+            "home": "1",
+            "away": "0"
+          },
+          "fx_j1cgbud": {
+            "home": "0",
+            "away": "1"
+          },
+          "fx_8yxws4b": {
+            "home": "3",
+            "away": "0"
+          },
+          "fx_15xsjhs": {
+            "home": "1",
+            "away": "1"
+          },
+          "fx_369dxxv": {
+            "home": "0",
+            "away": "2"
+          },
+          "fx_bkqs7d6": {
+            "home": "2",
+            "away": "0"
+          },
+          "fx_da3nene": {
+            "home": "0",
+            "away": "3"
+          },
+          "fx_m6b6nho": {
+            "home": "0",
+            "away": "2"
+          },
+          "fx_yortbgc": {
+            "home": "1",
+            "away": "3"
+          },
+          "fx_jvrrq9i": {
+            "home": "2",
+            "away": "2"
+          }
+        },
+        "m_08": {
+          "fx_fwz9s5m": {
+            "home": "1",
+            "away": "0"
+          },
+          "fx_j1cgbud": {
+            "home": "1",
+            "away": "2"
+          },
+          "fx_8yxws4b": {
+            "home": "3",
+            "away": "0"
+          },
+          "fx_15xsjhs": {
+            "home": "1",
+            "away": "1"
+          },
+          "fx_369dxxv": {
+            "home": "0",
+            "away": "3"
+          },
+          "fx_bkqs7d6": {
+            "home": "2",
+            "away": "0"
+          },
+          "fx_da3nene": {
+            "home": "1",
+            "away": "2"
+          },
+          "fx_m6b6nho": {
+            "home": "0",
+            "away": "2"
+          },
+          "fx_yortbgc": {
+            "home": "0",
+            "away": "2"
+          },
+          "fx_jvrrq9i": {
+            "home": "2",
+            "away": "2"
+          }
+        },
+        "m_ztdegjm": {
+          "fx_fwz9s5m": {
+            "home": "1",
+            "away": "1"
+          },
+          "fx_j1cgbud": {
+            "home": "2",
+            "away": "1"
+          },
+          "fx_8yxws4b": {
+            "home": "2",
+            "away": "0"
+          },
+          "fx_15xsjhs": {
+            "home": "2",
+            "away": "1"
+          },
+          "fx_369dxxv": {
+            "home": "0",
+            "away": "3"
+          },
+          "fx_bkqs7d6": {
+            "home": "3",
+            "away": "1"
+          },
+          "fx_da3nene": {
+            "home": "1",
+            "away": "3"
+          },
+          "fx_m6b6nho": {
+            "home": "1",
+            "away": "2"
+          },
+          "fx_yortbgc": {
+            "home": "1",
+            "away": "3"
+          },
+          "fx_jvrrq9i": {
+            "home": "2",
+            "away": "1"
+          }
+        }
+      },
+      "chips": {
+        "m_08": {
+          "double": false,
+          "tripleFixtureId": null
+        }
+      }
     }
   },
   "prize": {
@@ -10819,5 +11371,5 @@
     "m_85gsly9": 10,
     "m_15": 10
   },
-  "currentGameweek": 9
+  "currentGameweek": 10
 }
