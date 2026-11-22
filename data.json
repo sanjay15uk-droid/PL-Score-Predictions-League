@@ -12842,11 +12842,57 @@
             "home": "1",
             "away": "1"
           }
+        },
+        "m_14": {
+          "fx_bblitze": {
+            "home": "2",
+            "away": "0"
+          },
+          "fx_icu8zcd": {
+            "home": "2",
+            "away": "1"
+          },
+          "fx_cquterf": {
+            "home": "2",
+            "away": "2"
+          },
+          "fx_ru59r04": {
+            "home": "2",
+            "away": "1"
+          },
+          "fx_hgth21a": {
+            "home": "1",
+            "away": "2"
+          },
+          "fx_dg9w29k": {
+            "home": "2",
+            "away": "1"
+          },
+          "fx_f9hykxy": {
+            "home": "1",
+            "away": "2"
+          },
+          "fx_11qpvrd": {
+            "home": "0",
+            "away": "2"
+          },
+          "fx_sfp8r1s": {
+            "home": "1",
+            "away": "1"
+          },
+          "fx_72is3yl": {
+            "home": "2",
+            "away": "0"
+          }
         }
       },
       "chips": {
         "m_z42rpvd": {
           "double": true,
+          "tripleFixtureId": null
+        },
+        "m_18": {
+          "double": false,
           "tripleFixtureId": null
         }
       }
