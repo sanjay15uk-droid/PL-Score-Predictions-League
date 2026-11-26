@@ -13064,6 +13064,82 @@
           "tripleFixtureId": null
         }
       }
+    },
+    "12": {
+      "fixtures": [
+        {
+          "id": "fx_svcbq27",
+          "home": "Nottingham Forest",
+          "away": "Chelsea",
+          "actualHome": "",
+          "actualAway": ""
+        },
+        {
+          "id": "fx_bzzqbqp",
+          "home": "Leeds",
+          "away": "Coventry",
+          "actualHome": "",
+          "actualAway": ""
+        },
+        {
+          "id": "fx_u8kg0pw",
+          "home": "Man Utd",
+          "away": "Brentford",
+          "actualHome": "",
+          "actualAway": ""
+        },
+        {
+          "id": "fx_u0b7176",
+          "home": "Ipswich",
+          "away": "Aston Villa",
+          "actualHome": "",
+          "actualAway": ""
+        },
+        {
+          "id": "fx_rpxk7kx",
+          "home": "Everton",
+          "away": "Liverpool",
+          "actualHome": "",
+          "actualAway": ""
+        },
+        {
+          "id": "fx_8nlsoo6",
+          "home": "Brighton",
+          "away": "Newcastle",
+          "actualHome": "",
+          "actualAway": ""
+        },
+        {
+          "id": "fx_ytb3wj3",
+          "home": "Crystal Palace",
+          "away": "Hull",
+          "actualHome": "",
+          "actualAway": ""
+        },
+        {
+          "id": "fx_p9uyir8",
+          "home": "Fulham",
+          "away": "Bournemouth",
+          "actualHome": "",
+          "actualAway": ""
+        },
+        {
+          "id": "fx_a5bza1u",
+          "home": "Sunderland",
+          "away": "Spurs",
+          "actualHome": "",
+          "actualAway": ""
+        },
+        {
+          "id": "fx_bnb2pzr",
+          "home": "Arsenal",
+          "away": "Man City",
+          "actualHome": "",
+          "actualAway": ""
+        }
+      ],
+      "predictions": {},
+      "chips": {}
     }
   },
   "prize": {
@@ -13100,5 +13176,5 @@
     "m_15": 10,
     "m_18": 76
   },
-  "currentGameweek": 11
+  "currentGameweek": 12
 }
